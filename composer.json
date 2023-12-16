@@ -24,16 +24,6 @@
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "extra": {
-        "laravel": {
-            "providers": [
-
-            ],
-            "aliases": {
-
-            }
-        }
-    },
     "require": {
         "php": "^8.2",
         "ext-json": "*",
