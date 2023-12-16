@@ -5,7 +5,8 @@
     "keywords": [
         "laravel",
         "boostrap",
-        "admin"
+        "admin",
+        "dashboard"
     ],
     "homepage": "https://github.com/directsoft-ro/laravel-bootstrap-admin",
     "autoload": {
@@ -26,16 +27,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "DirectsoftRo\\LaravelBootstrapAdmin\\AdminServiceProvider",
-                "DirectsoftRo\\LaravelBootstrapComponents\\BootstrapComponentsServiceProvider",
-                "Artesaos\\SEOTools\\Providers\\SEOToolsServiceProvider"
+
             ],
             "aliases": {
-                "SEOMeta": "Artesaos\\SEOTools\\Facades\\SEOMeta",
-                "OpenGraph": "Artesaos\\SEOTools\\Facades\\OpenGraph",
-                "Twitter": "Artesaos\\SEOTools\\Facades\\TwitterCard",
-                "JsonLd": "Artesaos\\SEOTools\\Facades\\JsonLd",
-                "JsonLdMulti": "Artesaos\\SEOTools\\Facades\\JsonLdMulti"
+
             }
         }
     },
@@ -44,7 +39,7 @@
         "ext-json": "*",
         "illuminate/config": "^10.0",
         "illuminate/support": "^10.0",
-        "directsoft-ro/laravel-bootstrap-components": "v1.1.0",
+        "directsoft-ro/laravel-bootstrap-components": "v1.2.0",
         "artesaos/seotools": "^1.2"
     }
 }
