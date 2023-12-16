@@ -1,0 +1,50 @@
+{
+    "name": "directsoft-ro/laravel-bootstrap-admin",
+    "description": "Laravel Bootstrap 5 Admin",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "boostrap",
+        "admin"
+    ],
+    "homepage": "https://github.com/directsoft-ro/laravel-bootstrap-admin",
+    "autoload": {
+        "psr-4": {
+            "DirectsoftRo\\LaravelBootstrapAdmin\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ivan Stoianov",
+            "email": "ivan.stoianov@directsoft.ro",
+            "homepage": "https://directsoft.ro",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DirectsoftRo\\LaravelBootstrapAdmin\\AdminServiceProvider",
+                "DirectsoftRo\\LaravelBootstrapComponents\\BootstrapComponentsServiceProvider",
+                "Artesaos\\SEOTools\\Providers\\SEOToolsServiceProvider"
+            ],
+            "aliases": {
+                "SEOMeta": "Artesaos\\SEOTools\\Facades\\SEOMeta",
+                "OpenGraph": "Artesaos\\SEOTools\\Facades\\OpenGraph",
+                "Twitter": "Artesaos\\SEOTools\\Facades\\TwitterCard",
+                "JsonLd": "Artesaos\\SEOTools\\Facades\\JsonLd",
+                "JsonLdMulti": "Artesaos\\SEOTools\\Facades\\JsonLdMulti"
+            }
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "ext-json": "*",
+        "illuminate/config": "^10.0",
+        "illuminate/support": "^10.0",
+        "directsoft-ro/laravel-bootstrap-components": "v1.1.0",
+        "artesaos/seotools": "^1.2"
+    }
+}
