@@ -2,3 +2,4 @@ composer.lock
 .env
 /.idea
 /vendor
+/node_modules

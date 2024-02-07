@@ -10,27 +10,34 @@
                 <div class="mb-4 fs-4 border-bottom pb-2">
                     {{ __('Authentication') }}
                 </div>
+
                 @if(session('status'))
                     <div class="alert alert-success">
                         {{ session('status') }}
                     </div>
                 @endif
-                <div class="mb-3">
-                    <label for="email" class="form-label">{{ __('Email') }}</label>
-                    <input type="email" class="form-control" name="email" id="email"/>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">{{ __('Password') }}</label>
-                    <input type="password" class="form-control" name="password" id="password"/>
-                </div>
-                <div class="mb-3">
+
+                <x-bs.form-group>
+                    <x-bs.form-label for="email" required>{{ __('Email') }}</x-bs.form-label>
+                    <x-bs.form-input name="email" value="{{ old('email') }}"/>
+                    <x-bs.form-error name="email"/>
+                </x-bs.form-group>
+
+                <x-bs.form-group>
+                    <x-bs.form-label for="password" required>{{ __('Password') }}</x-bs.form-label>
+                    <x-bs.form-input type="password" name="password"/>
+                    <x-bs.form-error name="password"/>
+                </x-bs.form-group>
+
+                <x-bs.form-group>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="1" name="remember" id="remember">
                         <label class="form-check-label" for="remember">
                             {{ __('Remember me') }}
                         </label>
                     </div>
-                </div>
+                </x-bs.form-group>
+
                 <div class="d-flex align-items-center justify-content-between">
                     <button type="submit" class="btn btn-primary">{{ __('Sign in') }}</button>
                     <a href="{{ route('admin.auth.password.request') }}" class="text-decoration-none">

@@ -1,0 +1,31 @@
+@import "variables";
+
+#main-header {
+    background-color: $white;
+    border-bottom: 1px solid lighten($black, 90%);
+    height: $header-height;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 10;
+}
+
+#main-header .nav {
+    display: flex;
+    align-items: center;
+}
+
+#main-header .user-dropdown {
+    .dropdown-toggle {
+        font-size: 1rem;
+        height: $header-height - 5px;
+        border: none;
+        outline: none;
+    }
+}

@@ -22,13 +22,19 @@
             "role": "Developer"
         }
     ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DirectsoftRo\\LaravelBootstrapAdmin\\Providers\\AdminServiceProvider"
+            ]
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
         "php": "^8.2",
         "ext-json": "*",
-        "illuminate/config": "^10.0",
-        "illuminate/support": "^10.0",
+        "laravel/framework": "^8.37|^9.0|^10.0",
         "directsoft-ro/laravel-bootstrap-components": "v1.2.0",
         "artesaos/seotools": "^1.2"
     }

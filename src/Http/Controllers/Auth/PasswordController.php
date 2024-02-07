@@ -2,17 +2,15 @@
 
 namespace DirectsoftRo\LaravelBootstrapAdmin\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Models\User;
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Auth\Passwords\PasswordBroker;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
@@ -20,7 +18,9 @@ class PasswordController extends Controller
 {
     public function request(): View
     {
-        return view('admin.auth.password.email');
+        SEOMeta::setTitle(__('Reset password'));
+
+        return view('admin::auth.password.email');
     }
 
     /**
@@ -28,9 +28,15 @@ class PasswordController extends Controller
      */
     public function email(Request $request): RedirectResponse
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'email' => ['required', 'email'],
         ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withInput()
+                ->withErrors($validator->errors());
+        }
 
         $email = $request->get('email');
         $user = User::where('email', '=', $email)->active()->first();
@@ -58,9 +64,11 @@ class PasswordController extends Controller
 
     public function reset(Request $request, string $token): View
     {
+        SEOMeta::setTitle(__('Reset password'));
+
         $email = $request->get('email');
 
-        return view('admin.auth.password.update', compact('token', 'email'));
+        return view('admin::auth.password.update', compact('token', 'email'));
     }
 
     /**
@@ -68,11 +76,17 @@ class PasswordController extends Controller
      */
     public function update(Request $request): RedirectResponse
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'token' => ['required'],
             'email' => ['required', 'email'],
             'password' => ['required', 'min:8', 'confirmed'],
         ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withInput()
+                ->withErrors($validator->errors());
+        }
 
         $credentials = $request->only(['email', 'password', 'password_confirmation', 'token']);
 

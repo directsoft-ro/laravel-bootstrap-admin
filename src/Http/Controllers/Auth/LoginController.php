@@ -2,18 +2,20 @@
 
 namespace DirectsoftRo\LaravelBootstrapAdmin\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Models\User;
 use Artesaos\SEOTools\Facades\SEOMeta;
+use DirectsoftRo\LaravelBootstrapAdmin\Admin;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Routing\Pipeline;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class LoginController extends Controller
 {
+
     public function login(): View
     {
         SEOMeta::setTitle(__('Authentication'));
@@ -26,28 +28,22 @@ class LoginController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'email' => ['required', 'email'],
             'password' => ['required']
         ]);
 
-        $email = $request->get('email');
-        $password = $request->get('password');
-
-        $user = User::where('email', '=', $email)->where('active', '=', true)->first();
-        if (!$user) {
-            throw ValidationException::withMessages([
-                'email' => __('Invalid credentials.'),
-            ]);
+        if ($validator->fails()) {
+            return back()
+                ->withInput()
+                ->withErrors($validator->errors());
         }
 
-        if (!Hash::check($password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => __('Invalid credentials.'),
-            ]);
-        }
+        $user = (new Pipeline())->send($request)->through(array_filter(
+            call_user_func(Admin::$authenticateUsingCallback, $request),
+        ));
 
-        Auth::login($user, $request->has('remember'));
+        Auth::login($user, $request->boolean('remember'));
 
         return redirect()->intended(route('admin.home'));
     }

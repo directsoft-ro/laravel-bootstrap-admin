@@ -17,6 +17,10 @@ class AdminServiceProvider extends ServiceProvider
             __DIR__ . '/../../routes/admin.php' => base_path('routes/admin.php'),
         ], 'routes');
 
+        $this->publishes([
+            __DIR__ . '/../../public' => public_path('vendor/laravel-bootstrap-admin'),
+        ], 'assets');
+
         // Register middleware aliases
         foreach (config('admin.middleware_aliases', []) as $key => $value) {
             app('router')->aliasMiddleware($key, $value);
@@ -29,6 +33,10 @@ class AdminServiceProvider extends ServiceProvider
 
     public function register(): void
     {
+        if (class_exists(\DirectsoftRo\LaravelBootstrapComponents\Providers\ApplicationServiceProvider::class)) {
+            $this->app->register(\DirectsoftRo\LaravelBootstrapComponents\Providers\ApplicationServiceProvider::class);
+        }
+
         if (class_exists(\Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class)) {
             $this->app->register(\Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class);
             $this->app->alias('SEOMeta', \Artesaos\SEOTools\Facades\SEOMeta::class);
@@ -46,6 +54,11 @@ class AdminServiceProvider extends ServiceProvider
      */
     private function registerRoutes(): void
     {
+        $routesPath = base_path('routes/admin.php');
+        if (!file_exists($routesPath)) {
+            return;
+        }
+
         Route::middleware('web')
             ->as('admin.')
             ->domain(config('admin.domain'))

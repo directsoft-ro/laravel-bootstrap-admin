@@ -2,7 +2,7 @@
 
 namespace DirectsoftRo\LaravelBootstrapAdmin\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use Illuminate\View\View;
 
 class HomeController extends Controller

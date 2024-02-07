@@ -1,0 +1,50 @@
+// Colors
+$primary: #46007d;
+$secondary: #d023ac;
+$success: #00975b;
+$danger: #e82500;
+$warning: #dbc900;
+$info: #297885;
+$light: #d5e2e9;
+$dark: #040400;
+
+$black: black;
+$white: white;
+
+$theme-colors: (
+    "primary": $primary,
+    "secondary": $secondary,
+    "success": $success,
+    "info": $info,
+    "warning": $warning,
+    "danger": $danger,
+    "light": $light,
+    "dark": $dark
+);
+
+$enable-rounded: false;
+$input-btn-font-size: 0.9rem;
+
+// Header
+$header-height: 60px;
+
+// Sidebar
+$sidebar-width: 250px;
+$sidebar-bg: darken($black, 12%);
+$sidebar-bg-active: lighten($sidebar-bg, 10%);
+$sidebar-border: 1px solid lighten($black, 12%);
+$sidebar-header-height: $header-height;
+$sidebar-header-bg: darken($black, 15%);
+
+@import "bootstrap/scss/bootstrap";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+@import "bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.min.css";
+
+// TinyMCE Editor
+@import "tinymce/skins/ui/oxide/skin.min.css";
+@import "tinymce/skins/content/default/content.min.css";
+@import "tinymce/skins/content/default/content.css";
+
+// Dropzone
+@import "dropzone/src/dropzone";

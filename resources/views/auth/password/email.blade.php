@@ -1,4 +1,4 @@
-@extends('admin.layouts.guest')
+@extends('admin::layouts.guest')
 
 @section('body_class', 'page-auth')
 
@@ -13,13 +13,13 @@
                 @if(session('status'))
                     <div class="alert alert-success">{{ session('status') }}</div>
                 @endif
-                <div class="mb-3">
+                <x-bs.form-group>
                     <x-bs.form-label for="email" required>{{ __('Email') }}</x-bs.form-label>
                     <x-bs.form-input name="email" value="{{ old('email') }}"/>
-                    <x-bs.form-invalid-feedback name="email"/>
-                </div>
+                    <x-bs.form-error name="email"/>
+                </x-bs.form-group>
                 <div class="d-flex align-items-center justify-content-between">
-                    <x-bs.form-submit>{{ __('Submit') }}</x-bs.form-submit>
+                    <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
                     <a href="{{ route('admin.auth.login') }}" class="text-decoration-none">
                         {{ __('Sign in') }}
                     </a>
